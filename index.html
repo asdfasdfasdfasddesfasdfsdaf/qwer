@@ -3,96 +3,49 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Форма входа</title>
-    <style>
-        .error { color: red; }
-        .form-container { width: 300px; margin: 0 auto; padding-top: 50px; }
-        input { margin: 5px 0; padding: 8px; width: 100%; }
-        #login-form { display: block; }
-    </style>
+    <title>Тестовый сайт</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <div class="form-container">
+    <header>
+        <h1>Добро пожаловать на тестовый сайт</h1>
+        <p>Этот сайт предназначен для тестирования автоматизации</p>
+    </header>
+
+    <section id="login-section">
+        <h2>Вход</h2>
         <form id="login-form">
-            <h2>Вход</h2>
-            <div>
-                <label for="login">Логин (Email/Телефон/Ник):</label>
-                <input type="text" id="login" name="login" required />
-            </div>
-            <div>
-                <label for="password">Пароль:</label>
-                <input type="password" id="password" name="password" required />
-            </div>
-            <div>
-                <button type="submit" id="loginButton">Войти</button>
-            </div>
-            <div id="error-message" class="error" style="display: none;"></div>
-            <div>
-                <a href="#" id="forgotPasswordLink">Забыли пароль?</a>
-            </div>
-            <div>
-                <a href="#" id="registerLink">Регистрация</a>
-            </div>
-            <div>
-                <label>
-                    <input type="checkbox" id="rememberMe" name="rememberMe" />
-                    Запомнить меня
-                </label>
-            </div>
+            <label for="username">Имя пользователя:</label>
+            <input type="text" id="username" name="username" required>
+            <label for="password">Пароль:</label>
+            <input type="password" id="password" name="password" required>
+            <button type="submit" id="loginButton">Войти</button>
         </form>
-        <div id="logoutButton" style="display: none;">
-            <button onclick="logout()">Выйти</button>
-        </div>
-        <div id="loggedInUser" style="display: none;">Пользователь авторизован</div>
-    </div>
+    </section>
 
-    <script>
-        const loginButton = document.getElementById('loginButton');
-        const loginField = document.getElementById('login');
-        const passwordField = document.getElementById('password');
-        const errorMessage = document.getElementById('error-message');
-        const loginForm = document.getElementById('login-form');
-        const logoutButton = document.getElementById('logoutButton');
-        const loggedInUser = document.getElementById('loggedInUser');
+    <section id="content-section" style="display:none;">
+        <h2>Добро пожаловать, <span id="user-name"></span>!</h2>
+        <p>Нажмите на кнопку, чтобы лайкнуть пост:</p>
+        <button id="likeButton">Лайкнуть</button>
+        <br><br>
+        <h3>Изображения</h3>
+        <img src="https://via.placeholder.com/150" alt="Картинка 1">
+        <img src="https://via.placeholder.com/150" alt="Картинка 2">
+        <img src="https://via.placeholder.com/150" alt="Картинка 3">
+        <br><br>
+        <h3>Отправьте сообщение</h3>
+        <textarea id="messageInput" placeholder="Ваше сообщение"></textarea>
+        <button id="sendMessageButton">Отправить</button>
+        <br><br>
+        <h3>Отправьте отзыв</h3>
+        <textarea id="reviewText" placeholder="Ваш отзыв"></textarea>
+        <button id="submitReview">Отправить отзыв</button>
+    </section>
 
-        loginButton.addEventListener('click', function(event) {
-            event.preventDefault();
-            const login = loginField.value.trim();
-            const password = passwordField.value.trim();
+    <footer>
+        <p>&copy; 2023 Тестовый сайт</p>
+    </footer>
 
-            if (!login || !password) {
-                errorMessage.textContent = 'Заполните все поля';
-                errorMessage.style.display = 'block';
-                return;
-            }
-
-            if (login === 'validLogin' && password === 'validPassword') {
-                loggedInUser.style.display = 'block';
-                loginForm.style.display = 'none';
-                logoutButton.style.display = 'block';
-                errorMessage.style.display = 'none';
-                if (document.getElementById('rememberMe').checked) {
-                    localStorage.setItem('userLoggedIn', 'true');
-                }
-            } else {
-                errorMessage.textContent = 'Неправильный логин или пароль';
-                errorMessage.style.display = 'block';
-            }
-        });
-
-        function logout() {
-            localStorage.removeItem('userLoggedIn');
-            loggedInUser.style.display = 'none';
-            loginForm.style.display = 'block';
-            logoutButton.style.display = 'none';
-        }
-
-        // Check if user is logged in (using remember me)
-        if (localStorage.getItem('userLoggedIn') === 'true') {
-            loggedInUser.style.display = 'block';
-            loginForm.style.display = 'none';
-            logoutButton.style.display = 'block';
-        }
-    </script>
+    <script src="script.js"></script>
 </body>
 </html>
